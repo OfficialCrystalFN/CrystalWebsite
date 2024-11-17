@@ -3,6 +3,9 @@
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crystal FN - Experience Fortnite like never before with our private server">
+  <meta name="keywords" content="Fortnite, Crystal FN, private server, OG Fortnite">
+  <meta name="author" content="Crystal Team">
   <title>Crystal FN</title>
 
   <style>
@@ -12,8 +15,9 @@
       --primary: #ffffff;
       --secondary: #888888;
       --accent: #00c8ff;
-      --hover-effect: rgba(0, 200, 255, 0.5);
+      --crystal-gradient: linear-gradient(135deg, #00c8ff, #00aaff, #0088cc, #0066ff);
       --font-family: 'Inter', sans-serif;
+      --crystal-glow: rgba(0, 200, 255, 0.7);
     }
 
     * {
@@ -28,11 +32,13 @@
       color: var(--primary);
       line-height: 1.6;
       padding-top: 4rem; /* Offset for fixed navbar */
+      background-image: url('https://www.transparenttextures.com/patterns/diamond-smooth.png');
+      background-repeat: repeat;
     }
 
     nav {
       background-color: var(--surface);
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -40,14 +46,30 @@
       width: 100%;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(0, 200, 255, 0.2);
     }
 
     .crystal-logo {
-      font-size: 1.6rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--accent);
       text-transform: uppercase;
+      letter-spacing: 2px;
+      background: var(--crystal-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: crystalGlow 2s infinite alternate;
+    }
+
+    @keyframes crystalGlow {
+      0% {
+        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
+      }
+      100% {
+        text-shadow: 0 0 20px var(--crystal-glow), 0 0 30px var(--crystal-glow), 0 0 40px var(--crystal-glow);
+      }
     }
 
     .nav-links {
@@ -62,18 +84,9 @@
       position: relative;
       padding: 0.5rem 0;
       text-transform: uppercase;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--accent);
-      transition: width 0.3s ease;
+      letter-spacing: 1px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .nav-links a:hover {
@@ -81,24 +94,14 @@
       transform: scale(1.1);
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
     .page-container {
-      animation: fadeIn 0.5s ease-out;
       display: none;
-      opacity: 0;
-      transform: translateY(20px);
       padding: 6rem 2rem 2rem;
       min-height: 100vh;
-      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .page-container.active {
+    .active {
       display: block;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .hero-section {
@@ -110,7 +113,7 @@
       font-size: 3rem;
       margin-bottom: 1rem;
       color: var(--accent);
-      animation: glow 2s ease-in-out infinite alternate;
+      animation: crystalGlow 2s infinite alternate;
     }
 
     .hero-subtitle {
@@ -121,15 +124,16 @@
     }
 
     .cta-button {
-      background-color: var(--accent);
+      background: var(--crystal-gradient);
       color: var(--background);
       padding: 0.8rem 2rem;
       border-radius: 4px;
       text-decoration: none;
       font-weight: 600;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
       display: inline-block;
-      animation: pulse 2s infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: crystalGlow 2s infinite alternate;
     }
 
     .cta-button:hover {
@@ -179,11 +183,6 @@
       gap: 4rem;
     }
 
-    .download-content {
-      flex: 1;
-      text-align: left;
-    }
-
     .download-image {
       flex: 1;
       border-radius: 12px;
@@ -204,50 +203,6 @@
       transform: scale(1.05);
     }
 
-    .download-features {
-      margin-top: 2rem;
-    }
-
-    .download-features ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .download-features li {
-      margin: 1rem 0;
-      display: flex;
-      align-items: center;
-      color: var(--secondary);
-      font-weight: 500;
-    }
-
-    .download-features li i {
-      color: var(--accent);
-      margin-right: 1rem;
-    }
-
-    .download-cta {
-      margin-top: 2rem;
-    }
-
-    .download-btn {
-      background: linear-gradient(135deg, var(--accent), #0099ff);
-      color: var(--background);
-      padding: 1rem 2.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .download-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 200, 255, 0.3);
-    }
-
     .credits-container {
       padding: 2rem;
       text-align: center;
@@ -259,6 +214,7 @@
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: var(--accent);
+      animation: crystalGlow 2s infinite alternate;
     }
 
     .credits-list {
@@ -281,38 +237,6 @@
     .credits-list a:hover {
       text-decoration: underline;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
-      }
-      to {
-        text-shadow: 0 0 20px rgba(0, 200, 255, 0.6);
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(0, 200, 255, 0.4);
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgba(0, 200, 255, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(0, 200, 255, 0);
-      }
-    }
   </style>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
@@ -324,136 +248,87 @@
   <nav>
     <div class="crystal-logo">Crystal FN</div>
     <div class="nav-links">
-      <a href="#home" class="nav-link active" data-page="home">Home</a>
-      <a href="#download" class="nav-link" data-page="download">Download</a>
-      <a href="#features" class="nav-link" data-page="features">Features</a>
-      <a href="#discord" class="nav-link" data-page="discord">Discord</a>
-      <a href="#credits" class="nav-link" data-page="credits">Credits</a>
+      <a href="javascript:void(0)" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
+      <a href="javascript:void(0)" class="nav-link" data-page="download" onclick="showPage('download')">Download</a>
+      <a href="javascript:void(0)" class="nav-link" data-page="features" onclick="showPage('features')">Features</a>
+      <a href="javascript:void(0)" class="nav-link" data-page="discord" onclick="showPage('discord')">Discord</a>
+      <a href="javascript:void(0)" class="nav-link" data-page="credits" onclick="showPage('credits')">Credits</a>
     </div>
   </nav>
 
-  <!-- Home Page -->
   <div id="home" class="page-container active">
-    <div class="hero-section">
+    <section class="hero-section">
       <h1 class="hero-title">Welcome to Crystal FN</h1>
-      <p class="hero-subtitle">Experience Fortnite like never before</p>
-      <a href="#download" class="cta-button nav-link" data-page="download">Get Started</a>
-    </div>
+      <p class="hero-subtitle">Explore the world of OG Fortnite.</p>
+      <a href="#download" class="cta-button">Get Started</a>
+    </section>
   </div>
 
-  <!-- Download Page -->
   <div id="download" class="page-container">
     <div class="download-container">
-      <div class="download-content">
-        <h1 class="hero-title">Download Crystal FN</h1>
-        <p class="hero-subtitle">Experience the ultimate Fortnite private server</p>
-
-        <div class="download-features">
-          <ul>
-            <li><i class="fas fa-check"></i> Easy to install launcher</li>
-            <li><i class="fas fa-check"></i> Instant access</li>
-            <li><i class="fas fa-check"></i> Regular updates and support</li>
-            <li><i class="fas fa-check"></i> Active community</li>
-          </ul>
-        </div>
-
-        <div class="download-cta">
-          <a href="https://cdn.discordapp.com/attachments/1306868696177967175/1307796400095891477/CrystalLauncherFIXED.zip?ex=673b9bcf&is=673a4a4f&hm=92661fcfed1cab00de7f403c7552c754d39dbeb9c7ec758b3049dc9bf9327122&" class="download-btn">
-            <i class="fas fa-download"></i> Download Crystal Launcher
-          </a>
-          <p style="color: var(--accent); margin-top: 1rem; font-weight: 500;">REQUIRES .NET 7.0</p>
-        </div>
-      </div>
-
       <div class="download-image">
-        <img src="https://media.discordapp.net/attachments/1307556526462074973/1307780036719415520/image.png?ex=673b8c92&is=673a3b12&hm=e3ac4de3f6badf0d9ae91d91038daa50b80440153693e4a3696d067ef2295275&=&format=webp&quality=lossless" alt="Crystal FN Launcher Interface">
+        <img src="https://via.placeholder.com/500" alt="Download Image">
+      </div>
+      <div>
+        <h2>Crystal FN Launcher</h2>
+        <p>Instant access to your favorite Fortnite private server.</p>
+        <!-- This is the download link -->
+        <a href="https://cdn.discordapp.com/attachments/1306868696177967175/1307796400095891477/CrystalLauncherFIXED.zip?ex=673b9bcf&is=673a4a4f&hm=92661fcfed1cab00de7f403c7552c754d39dbeb9c7ec758b3049dc9bf9327122&" class="cta-button" download>Download Now</a>
+        <p><strong>REQUIRES .NET 7.0</strong></p>
       </div>
     </div>
   </div>
 
-  <!-- Features Page -->
   <div id="features" class="page-container">
-    <div class="hero-section">
-      <h1 class="hero-title">Features</h1>
-      <div class="features-grid">
-        <div class="feature-card">
-          <i class="fas fa-clock feature-icon"></i>
-          <h3>OG Fortnite</h3>
-          <p>Experience the classic Fortnite gameplay</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-gamepad feature-icon"></i>
-          <h3>Still in Beta</h3>
-          <p>We are still in beta, join our OG Players!</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-users feature-icon"></i>
-          <h3>Active Community</h3>
-          <p>Join our growing player base</p>
-        </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-cogs feature-icon"></i>
+        <h3>Custom Features</h3>
+        <p>Enhance your gameplay with unique custom features.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-users feature-icon"></i>
+        <h3>Community Driven</h3>
+        <p>Join a passionate community of Fortnite fans.</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-shield-alt feature-icon"></i>
+        <h3>Anti-Cheat System</h3>
+        <p>Enjoy a safe and fair gaming environment.</p>
       </div>
     </div>
   </div>
 
-  <!-- Discord Page -->
-  <div id="discord" class="page-container">
-    <div class="hero-section">
-      <h1 class="hero-title">Join Our Discord</h1>
-      <p class="hero-subtitle">Connect with the community</p>
-      <a href="https://discord.gg/49mqN2guPf" class="cta-button">Join Discord</a>
-    </div>
-  </div>
-
-  <!-- Credits Page -->
   <div id="credits" class="page-container">
     <div class="credits-container">
-      <h1 class="credits-title">Credits</h1>
+      <h2 class="credits-title">Credits</h2>
       <ul class="credits-list">
-        <li>Developed by <a href="https://discord.gg/49mqN2guPf" target="_blank">Crystal Team</a></li>
-        <li>Special thanks to the <a href="https://discord.gg/49mqN2guPf" target="_blank">Discord Community</a></li>
-        <li>Launcher V1 Source by <a href="https://github.com/eonfn/Launcher-V1" target="_blank">Eon</a></li>
-        <li>Original Game by <a href="https://epicgames.com/" target="_blank">Epic Games</a></li>
+        <li><a href="https://github.com" target="_blank">GitHub - Crystal FN Repository</a></li>
+        <li><a href="https://www.epicgames.com/fortnite" target="_blank">Fortnite by Epic Games</a></li>
       </ul>
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const navLinks = document.querySelectorAll('.nav-link');
+    function showPage(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page-container');
+      pages.forEach(page => page.classList.remove('active'));
 
-      function showPage(pageId) {
-        document.querySelectorAll('.page-container').forEach(page => page.classList.remove('active'));
-        const targetPage = document.getElementById(pageId);
-        if (targetPage) {
-          targetPage.classList.add('active');
-        }
+      // Remove active class from all nav links
+      const links = document.querySelectorAll('.nav-link');
+      links.forEach(link => link.classList.remove('active'));
 
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('data-page') === pageId) {
-            link.classList.add('active');
-          }
-        });
+      // Show selected page and activate corresponding nav link
+      const page = document.getElementById(pageId);
+      page.classList.add('active');
 
-        history.pushState(null, null, `#${pageId}`);
-      }
+      const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+      activeLink.classList.add('active');
+    }
 
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const pageId = this.getAttribute('data-page');
-          showPage(pageId);
-        });
-      });
-
-      function handleHash() {
-        const hash = window.location.hash.substring(1) || 'home';
-        showPage(hash);
-      }
-
-      window.addEventListener('hashchange', handleHash);
-      handleHash(); // Initial load
-    });
+    // Initialize default active page
+    showPage('home');
   </script>
 
 </body>
