@@ -1,0 +1,282 @@
+<html><head><base href="." /><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.profile {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  margin: 1rem auto;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.cat-avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.cat-ear {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid #ffb6c1;
+}
+
+.cat-ear.left {
+  top: -5px;
+  left: 10px;
+  transform: rotate(-30deg);
+}
+
+.cat-ear.right {
+  top: -5px;
+  right: 10px;
+  transform: rotate(30deg);
+}
+
+.cat-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffb6c1;
+  border-radius: 50%;
+}
+
+.cat-eye {
+  position: absolute;
+  width: 12px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  top: 35px;
+}
+
+.cat-eye.left {
+  left: 25px;
+}
+
+.cat-eye.right {
+  right: 25px;
+}
+
+.cat-nose {
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  background: #ff8fab;
+  border-radius: 50%;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cat-mouth {
+  position: absolute;
+  width: 30px;
+  height: 10px;
+  border-radius: 0 0 30px 30px;
+  border: 2px solid #000;
+  border-top: 0;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.bio {
+  color: #888;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.link {
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.link:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.social-links {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.social-link {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: #888;
+}
+
+.verified-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #333;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.verified-icon svg {
+  width: 24px; /* Increased from 14px */
+  height: 24px; /* Increased from 14px */
+  fill: #1DA1F2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catBlink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+.cat-eye {
+  animation: catBlink 4s infinite;
+}
+
+.profile {
+  animation: fadeIn 1s ease;
+}
+</style>
+</head>
+<body>
+  <div class="profile">
+    <div class="avatar">
+      <div class="cat-ear left"></div>
+      <div class="cat-ear right"></div>
+      <div class="cat-face">
+        <div class="cat-eye left"></div>
+        <div class="cat-eye right"></div>
+        <div class="cat-nose"></div>
+        <div class="cat-mouth"></div>
+      </div>
+    </div>
+    <h1 class="name">korp</h1>
+    <div class="verified-icon">
+      <svg viewBox="0 0 24 24" aria-label="Verified account">
+        <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path>
+      </svg>
+    </div>
+    <p class="bio">stupid idioit coder living life</p>
+    
+    <div class="links">
+      <a href="https://crystalfn.com" class="link">
+        <i class="fa fa-link"></i>
+        Crystal FN
+      </a>
+    </div>
+
+    <div class="social-links">
+      <a href="https://twitter.com/@akakorp" class="social-link">
+        <i class="fa fa-twitter"></i>
+      </a>
+      <a href="https://instagram.com" class="social-link">
+        <i class="fa fa-instagram"></i>
+      </a>
+      <a href="https://youtube.com/@foreverkorping" class="social-link">
+        <i class="fa fa-youtube-play"></i>
+      </a>
+      <a href="https://facebook.com" class="social-link">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Add hover sound effect
+    const links = document.querySelectorAll('.link');
+    const hoverSound = new Audio('data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjIwLjEwMAAAAAAAAAAAAAAA//tUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAAFKgD///////////////////////////////////////////8AAAAATGF2YzU4LjM1AAAAAAAAAAAAAAAAJAAAAAAAAAAAASgTwUihAAAA');
+    
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play();
+      });
+    });
+
+    // Add simple analytics
+    const trackClick = (url) => {
+      console.log(`Link clicked: ${url}`);
+      // Here you could add real analytics tracking
+    };
+
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        trackClick(link.href);
+      });
+    });
+  </script>
+</body></html>
