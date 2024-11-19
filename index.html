@@ -1,333 +1,556 @@
-<html>
-<head>
-  <base href="/">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Crystal FN - Experience OG Fortnite like never before with our private server!">
-  <meta name="keywords" content="Fortnite, Crystal FN, private server, OG Fortnite">
-  <meta name="author" content="Crystal Team">
-  <title>Crystal FN</title>
+<htm<html><head><base href="/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal FN</title>
 
-  <style>
-    :root {
-      --background: #0a0a0a;
-      --surface: #111111;
-      --primary: #ffffff;
-      --secondary: #888888;
-      --accent: #00c8ff;
-      --crystal-gradient: linear-gradient(135deg, #00c8ff, #00aaff, #0088cc, #0066ff);
-      --font-family: 'Inter', sans-serif;
-      --crystal-glow: rgba(0, 200, 255, 0.7);
-    }
+<style>
+:root {
+  --background: #040612;
+  --surface: #0a0f1d;
+  --primary: #ffffff;
+  --secondary: #8892b0;
+  --accent: #00e5ff;
+  --crystal-gradient: linear-gradient(135deg, #00e5ff, #0051ff);
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: var(--font-family);
-      background-color: var(--background);
-      color: var(--primary);
-      line-height: 1.6;
-      padding-top: 4rem; /* Offset for fixed navbar */
-      background-image: url('https://www.transparenttextures.com/patterns/diamond-smooth.png');
-      background-repeat: repeat;
-    }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--primary);
+  line-height: 1.6;
+  position: relative;
+}
 
-    nav {
-      background-color: var(--surface);
-      padding: 1.2rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid rgba(0, 200, 255, 0.2);
-    }
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, 
+              rgba(0, 229, 255, 0.1), 
+              transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
 
-    .crystal-logo {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      background: var(--crystal-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: crystalGlow 2s infinite alternate;
-    }
+nav {
+  background-color: var(--surface);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;  /* Changed from space-between to center */
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
 
-    @keyframes crystalGlow {
-      0% {
-        text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent), 0 0 30px var(--accent);
-      }
-      100% {
-        text-shadow: 0 0 20px var(--crystal-glow), 0 0 30px var(--crystal-glow), 0 0 40px var(--crystal-glow);
-      }
-    }
+.nav-links {
+  display: flex;
+  gap: 3rem;  /* Increased gap between links */
+  background: rgba(10, 15, 29, 0.8);  /* Slightly transparent background */
+  padding: 0.8rem 2rem;
+  border-radius: 50px;  /* Rounded corners */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
+.nav-links a {
+  color: var(--secondary);  /* Default color more subtle */
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease;
+}
 
-    .nav-links a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-      padding: 0.5rem 0;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
+.nav-links a:hover {
+  color: var(--primary);
+}
 
-    .nav-links a:hover {
-      color: var(--accent);
-      transform: scale(1.1);
-    }
+.nav-links a.active {
+  color: var(--accent);
+}
 
-    .page-container {
-      display: none;
-      padding: 6rem 2rem 2rem;
-      min-height: 100vh;
-    }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--crystal-gradient);
+  transition: width 0.3s ease, left 0.3s ease;
+}
 
-    .active {
-      display: block;
-    }
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+  left: 0;
+}
 
-    .hero-section {
-      text-align: center;
-      padding: 2rem;
-    }
+.page-container {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 6rem 2rem 2rem;
+  min-height: 100vh;
+}
 
-    .hero-title {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-      animation: crystalGlow 2s infinite alternate;
-    }
+.page-container.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: var(--secondary);
-      margin-bottom: 2rem;
-      font-weight: 300;
-    }
+.hero-section {
+  text-align: center;
+  padding: 2rem;
+}
 
-    .cta-button {
-      background: var(--crystal-gradient);
-      color: var(--background);
-      padding: 0.8rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 600;
-      text-transform: uppercase;
-      display: inline-block;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: crystalGlow 2s infinite alternate;
-    }
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  animation: glow 2s ease-in-out infinite alternate;
+}
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 200, 255, 0.4);
-    }
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  margin-bottom: 2rem;
+}
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-    }
+.cta-button {
+  background-color: var(--accent);
+  color: var(--background);
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
 
-    .feature-card {
-      background-color: var(--surface);
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 15px rgba(0, 200, 255, 0.1);
-    }
+.cta-button:hover {
+  transform: translateY(-2px);
+}
 
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 200, 255, 0.3);
-    }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
 
-    .feature-icon {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      transition: color 0.3s ease;
-    }
+.feature-card {
+  background-color: var(--surface);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  overflow: hidden;
+}
 
-    .feature-card:hover .feature-icon {
-      color: var(--primary);
-    }
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--crystal-gradient);
+  opacity: 0.2;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
 
-    .download-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-      gap: 4rem;
-    }
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 200, 255, 0.3);
+}
 
-    .download-image {
-      flex: 1;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
+.feature-card:hover::before {
+  opacity: 0.4;
+}
 
-    .download-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.3s ease;
-    }
+.feature-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
 
-    .download-image:hover img {
-      transform: scale(1.05);
-    }
+.download-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  gap: 4rem;
+}
 
-    .credits-container {
-      padding: 2rem;
-      text-align: center;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+.download-content {
+  flex: 1;
+}
 
-    .credits-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-      animation: crystalGlow 2s infinite alternate;
-    }
+.download-image {
+  flex: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
+}
 
-    .credits-list {
-      list-style: none;
-      padding: 0;
-      color: var(--secondary);
-    }
+.download-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
 
-    .credits-list li {
-      font-weight: 500;
-      margin: 0.5rem 0;
-    }
+.download-image:hover img {
+  transform: scale(1.02);
+}
 
-    .credits-list a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
+.download-features {
+  margin-top: 2rem;
+}
 
-    .credits-list a:hover {
-      text-decoration: underline;
-    }
-  </style>
+.download-features ul {
+  list-style: none;
+  padding: 0;
+}
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+.download-features li {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  color: var(--secondary);
+}
+
+.download-features li i {
+  color: var(--accent);
+  margin-right: 1rem;
+}
+
+.download-cta {
+  margin-top: 2rem;
+}
+
+.download-btn {
+  background: linear-gradient(135deg, var(--accent), #0099ff);
+  color: var(--background);
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 200, 255, 0.3);
+}
+
+.home-content {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.fortnite-showcase {
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.showcase-image {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 200, 255, 0.2);
+}
+
+.origin-story {
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: 12px;
+  margin: 3rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.origin-story h2 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.origin-story p {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.discord-section {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--surface);
+  margin-top: 4rem;
+}
+
+.discord-section h2 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.discord-button {
+  background: #5865F2;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.discord-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(0, 200, 255, 0.2);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 200, 255, 0.6);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 200, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 255, 0);
+  }
+}
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
-  <nav>
-    <div class="crystal-logo">Crystal FN</div>
-    <div class="nav-links">
-      <a href="javascript:void(0)" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
-      <a href="javascript:void(0)" class="nav-link" data-page="download" onclick="showPage('download')">Download</a>
-      <a href="javascript:void(0)" class="nav-link" data-page="features" onclick="showPage('features')">Features</a>
-      <a href="https://discord.gg/49mqN2guPf" class="nav-link" target="_blank">Discord</a> <!-- Updated Discord link -->
-      <a href="javascript:void(0)" class="nav-link" data-page="credits" onclick="showPage('credits')">Credits</a>
-    </div>
-  </nav>
+<nav>
+  <div class="nav-links">
+    <a href="#home" class="nav-link active" data-page="home">Home</a>
+    <a href="#download" class="nav-link" data-page="download">Download</a>
+    <a href="#features" class="nav-link" data-page="features">Features</a>
+  </div>
+</nav>
 
-  <div id="home" class="page-container active">
-    <section class="hero-section">
-      <h1 class="hero-title">Welcome to Crystal FN</h1>
-      <p class="hero-subtitle">Experience OG Fortnite like never before. Join the Crystal FN community!</p>
-    </section>
+<div id="home" class="page-container active">
+  <div class="hero-section">
+    <h1 class="hero-title">Welcome to Crystal FN</h1>
+    <p class="hero-subtitle">Experience OG Fortnite like never before</p>
+    <a href="#download" class="cta-button nav-link" data-page="download">Get Started</a>
   </div>
 
-  <div id="download" class="page-container">
-    <div class="download-container">
-      <div class="download-image">
-        <img src="https://media.discordapp.net/attachments/1307556526462074973/1307780036719415520/image.png?ex=673b8c92&is=673a3b12&hm=e3ac4de3f6badf0d9ae91d91038daa50b80440153693e4a3696d067ef2295275&=&format=webp&quality=lossless" alt="Download Image">
-      </div>
-      <div>
-        <h2>Crystal FN Launcher</h2>
-        <p>Instant access to your favorite Fortnite private server.</p>
-        <a href="https://cdn.discordapp.com/attachments/1306868696177967175/1307796400095891477/CrystalLauncherFIXED.zip?ex=673b9bcf&is=673a4a4f&hm=92661fcfed1cab00de7f403c7552c754d39dbeb9c7ec758b3049dc9bf9327122&" class="cta-button" download>Download Now</a>
-        <p><strong>REQUIRES .NET 7.0</strong></p>
-      </div>
+  <div class="home-content">
+    <div class="fortnite-showcase">
+      <img 
+        src="https://cdn.discordapp.com/attachments/1307556526462074973/1308243026505629778/Fortnite_blog_ea-1-6-3-release-notes_header-1-1920x1080-10c0db6019078c17264814459c37927d38617154.png?ex=673d3bc3&is=673bea43&hm=91e31881ea9a32285baf934a919670a3e409c200a256e0295d94c229768ffb00&"
+        alt="OG Fortnite Gameplay Screenshot"
+        class="showcase-image"
+        width="800"
+        height="450"
+      >
+    </div>
+
+    <div class="origin-story">
+      <h2>Our Story</h2>
+      <p>Crystal FN was born from a passion to preserve and share the magic of OG Fortnite. We believed that the classic experience that brought millions of players together shouldn't be lost to time. Our team worked tirelessly to recreate that special era of Fortnite, bringing back the memorable moments, iconic locations, and gameplay mechanics that made us fall in love with the game.</p>
+      <p>Today, Crystal FN stands as a testament to the community's dedication, offering players a chance to relive those golden days or experience them for the first time.</p>
     </div>
   </div>
 
-  <div id="features" class="page-container">
+  <div class="discord-section">
+    <h2>Join Our Community</h2>
+    <p>Connect with fellow OG Fortnite enthusiasts in our Discord server</p>
+    <a href="https://discord.gg/49mqN2guPf>
+      <i class="fab fa-discord"></i> Join Discord
+    </a>
+  </div>
+</div>
+
+<div id="download" class="page-container">
+  <div class="download-container">
+    <div class="download-content">
+      <h1 class="hero-title">Download Crystal</h1>
+      <p class="hero-subtitle">Experience the ultimate OG Fortnite private server</p>
+      
+      <div class="download-features">
+        <ul>
+          <li><i class="fas fa-check"></i> Easy to install launcher</li>
+          <li><i class="fas fa-check"></i> Instant access to OG Fortnite</li>
+          <li><i class="fas fa-check"></i> Regular updates and support</li>
+          <li><i class="fas fa-check"></i> Active community</li>
+        </ul>
+      </div>
+      
+      <div class="download-cta">
+        <a href="https://cdn.discordapp.com/attachments/1306868696177967175/1307796400095891477/CrystalLauncherFIXED.zip?ex=673b9bcf&is=673a4a4f&hm=92661fcfed1cab00de7f403c7552c754d39dbeb9c7ec758b3049dc9bf9327122&" class="download-btn">
+          <i class="fas fa-download"></i>
+          Download Crystal Launcher
+        </a>
+        <p style="color: var(--accent); margin-top: 1rem; font-weight: 500;">REQUIRES .NET 7.0</p>
+      </div>
+    </div>
+    
+    <div class="download-image">
+      <img 
+        src="https://cdn.discordapp.com/attachments/1307556526462074973/1307780036719415520/image.png?ex=673b8c92&is=673a3b12&hm=e3ac4de3f6badf0d9ae91d91038daa50b80440153693e4a3696d067ef2295275&"
+        alt="OG Fortnite Gameplay Screenshot"
+        width="600"
+        height="400"
+      >
+    </div>
+  </div>
+</div>
+
+<div id="features" class="page-container">
+  <div class="hero-section">
+    <h1 class="hero-title">Features</h1>
     <div class="features-grid">
       <div class="feature-card">
-        <i class="fas fa-cogs feature-icon"></i>
-        <h3>Custom Features</h3>
-        <p>Enhance your gameplay with unique custom features.</p>
+        <i class="fas fa-clock feature-icon"></i>
+        <h3>OG Fortnite</h3>
+        <p>Experience the classic Fortnite gameplay</p>
+      </div>
+      <div class="feature-card">
+        <i class="fas fa-gamepad feature-icon"></i>
+        <h3>Classic Content</h3>
+        <p>All OG Fortnite features available</p>
       </div>
       <div class="feature-card">
         <i class="fas fa-users feature-icon"></i>
-        <h3>Community Driven</h3>
-        <p>Join a passionate community of Fortnite fans.</p>
-      </div>
-      <div class="feature-card">
-        <i class="fas fa-shield-alt feature-icon"></i>
-        <h3>Anti-Cheat System</h3>
-        <p>Enjoy a safe and fair gaming environment.</p>
+        <h3>Active Community</h3>
+        <p>Join our growing player base</p>
       </div>
     </div>
   </div>
+</div>
 
-  <div id="credits" class="page-container">
-    <div class="credits-container">
-      <h2 class="credits-title">Credits</h2>
-      <ul class="credits-list">
-        <li><a href="https://github.com" target="_blank">GitHub - Crystal FN Repository</a></li>
-        <li><a href="https://www.epicgames.com/fortnite" target="_blank">Fortnite by Epic Games</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const downloadImage = document.querySelector('.download-image');
+    
     function showPage(pageId) {
-      // Hide all pages
-      const pages = document.querySelectorAll('.page-container');
-      pages.forEach(page => page.classList.remove('active'));
-
-      // Remove active class from all nav links
-      const links = document.querySelectorAll('.nav-link');
-      links.forEach(link => link.classList.remove('active'));
-
-      // Show selected page and activate corresponding nav link
-      const page = document.getElementById(pageId);
-      page.classList.add('active');
-
-      const activeLink = document.querySelector(`[data-page="${pageId}"]`);
-      activeLink.classList.add('active');
+        // Hide all pages
+        document.querySelectorAll('.page-container').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Show target page
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+        }
+        
+        // Update active nav link
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Update URL hash without scrolling
+        history.pushState(null, null, `#${pageId}`);
     }
 
-    // Initialize default active page
-    showPage('home');
-  </script>
+    // Handle navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageId = this.getAttribute('data-page');
+            showPage(pageId);
+        });
+    });
+
+    // Handle initial load and back/forward navigation
+    function handleHash() {
+        const hash = window.location.hash.substring(1) || 'home';
+        showPage(hash);
+    }
+
+    // Add tilt effect to download image
+    if (downloadImage) {
+        downloadImage.addEventListener('mousemove', (e) => {
+            const rect = downloadImage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const tiltX = ((y - centerY) / centerY) * -10;
+            const tiltY = ((x - centerX) / centerX) * 10;
+            
+            downloadImage.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        downloadImage.addEventListener('mouseleave', () => {
+            downloadImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    }
+
+    window.addEventListener('hashchange', handleHash);
+    handleHash(); // Handle initial load
+});
+</script>
 
 </body>
 </html>
