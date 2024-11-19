@@ -1,4 +1,4 @@
-<htm<html><head><base href="/">
+<html><head><base href="/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crystal FN</title>
@@ -283,6 +283,10 @@ nav {
 .fortnite-showcase {
   margin: 3rem 0;
   text-align: center;
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
 }
 
 .showcase-image {
@@ -291,6 +295,7 @@ nav {
   height: auto;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(0, 200, 255, 0.2);
+  transition: transform 0.3s ease;
 }
 
 .origin-story {
@@ -401,7 +406,7 @@ nav {
     <div class="fortnite-showcase">
       <img 
         src="https://cdn.discordapp.com/attachments/1307556526462074973/1308243026505629778/Fortnite_blog_ea-1-6-3-release-notes_header-1-1920x1080-10c0db6019078c17264814459c37927d38617154.png?ex=673d3bc3&is=673bea43&hm=91e31881ea9a32285baf934a919670a3e409c200a256e0295d94c229768ffb00&"
-        alt="pleasexgod let me fix the image aa"
+        alt="OG Fortnite Gameplay Screenshot"
         class="showcase-image"
         width="800"
         height="450"
@@ -418,7 +423,7 @@ nav {
   <div class="discord-section">
     <h2>Join Our Community</h2>
     <p>Connect with fellow OG Fortnite enthusiasts in our Discord server</p>
-    <a href="https://discord.gg/49mqN2guPf" a>
+    <a href="https://discord.gg/49mqN2guPf" class="discord-button">
       <i class="fab fa-discord"></i> Join Discord
     </a>
   </div>
@@ -427,7 +432,7 @@ nav {
 <div id="download" class="page-container">
   <div class="download-container">
     <div class="download-content">
-      <h1 class="hero-title">Download Crystal</h1>
+      <h1 class="hero-title">Download Crystal FN</h1>
       <p class="hero-subtitle">Experience the ultimate OG Fortnite private server</p>
       
       <div class="download-features">
@@ -440,7 +445,7 @@ nav {
       </div>
       
       <div class="download-cta">
-        <a href="https://cdn.discordapp.com/attachments/1307556526462074973/1307780036719415520/image.png?ex=673cde12&is=673b8c92&hm=648b4f80b476e84eeb4f6f1aea840a07161d5823b63c669bc22957e64803f312&" class="download-btn">
+        <a href="https://cdn.discordapp.com/attachments/1306868696177967175/1307796400095891477/CrystalLauncherFIXED.zip?ex=673b9bcf&is=673a4a4f&hm=92661fcfed1cab00de7f403c7552c754d39dbeb9c7ec758b3049dc9bf9327122&" class="download-btn">
           <i class="fas fa-download"></i>
           Download Crystal Launcher
         </a>
@@ -486,7 +491,8 @@ nav {
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
     const downloadImage = document.querySelector('.download-image');
-    
+    const showcaseImage = document.querySelector('.fortnite-showcase');
+
     function showPage(pageId) {
         // Hide all pages
         document.querySelectorAll('.page-container').forEach(page => {
@@ -544,6 +550,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
         downloadImage.addEventListener('mouseleave', () => {
             downloadImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    }
+
+    // Add tilt effect to showcase image
+    if (showcaseImage) {
+        showcaseImage.addEventListener('mousemove', (e) => {
+            const rect = showcaseImage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const tiltX = ((y - centerY) / centerY) * -10;
+            const tiltY = ((x - centerX) / centerX) * 10;
+            
+            showcaseImage.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+
+        showcaseImage.addEventListener('mouseleave', () => {
+            showcaseImage.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         });
     }
 
